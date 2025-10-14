@@ -10825,3 +10825,56 @@ textarea.form-control-lg {
   }
 }
 
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+.h-custom {
+height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+.h-custom {
+height: 100%;
+}
+}
+
+.card-home-img{
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+
+
+.home-card {
+  position: relative;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.home-card .overlay {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  background: rgba(0,0,0,.4);
+}
+
+.home-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.home-card.man   { background-image: url("../imgs/musko.png"); }
+.home-card.woman { background-image: url("../imgs/zensko.png"); }
+.home-card.kids  { background-image: url("../imgs/dijete.png"); }
