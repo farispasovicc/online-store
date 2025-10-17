@@ -10878,3 +10878,12 @@ height: 100%;
 .home-card.man   { background-image: url("../imgs/musko.png"); }
 .home-card.woman { background-image: url("../imgs/zensko.png"); }
 .home-card.kids  { background-image: url("../imgs/dijete.png"); }
+
+.card-img-top {
+  width: 100%;
+  height: auto;
+  max-height: 500px; 
+  object-fit: cover; 
+
+}
+
