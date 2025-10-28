@@ -20,7 +20,7 @@ class BaseDao {
        return $stmt->fetchAll();
    }
 
-
+   
    public function getById($id) {
        $stmt = $this->connection->prepare("SELECT * FROM " . $this->table . " WHERE id = :id");
        $stmt->bindParam(':id', $id);
