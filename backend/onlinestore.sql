@@ -33,7 +33,7 @@ CREATE TABLE `orderitems` (
   KEY `product_id` (`product_id`),
   CONSTRAINT `orderitems_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
   CONSTRAINT `orderitems_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `orderitems` (
 
 LOCK TABLES `orderitems` WRITE;
 /*!40000 ALTER TABLE `orderitems` DISABLE KEYS */;
-INSERT INTO `orderitems` VALUES (1,1,1,1,129.90),(2,1,4,1,24.99),(3,2,3,1,59.90),(4,3,2,1,119.50),(5,3,5,1,189.00),(6,4,4,1,24.99),(7,5,5,1,189.00),(8,10,1,1,129.90),(9,26,1,1,129.90),(10,27,1,1,129.90),(11,28,1,1,129.90),(12,29,1,1,129.90),(13,30,1,1,129.90),(14,31,1,1,129.90);
+INSERT INTO `orderitems` VALUES (1,1,1,1,129.90),(2,1,4,1,24.99),(3,2,3,1,59.90),(4,3,2,1,119.50),(5,3,5,1,189.00),(6,4,4,1,24.99),(7,5,5,1,189.00),(8,10,1,1,129.90),(9,26,1,1,129.90),(10,27,1,1,129.90),(11,28,1,1,129.90),(12,29,1,1,129.90),(13,30,1,1,129.90),(14,31,1,1,129.90),(15,32,1,1,129.90);
 /*!40000 ALTER TABLE `orderitems` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +62,7 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,1,'Completed',154.89,'2025-10-28 14:20:54'),(2,2,'Processing',59.90,'2025-10-28 14:20:54'),(3,3,'Paid',308.50,'2025-10-28 14:20:54'),(4,4,'Cancelled',24.99,'2025-10-28 14:20:54'),(5,5,'Completed',189.00,'2025-10-28 14:20:54'),(6,6,'Pending',25.98,'2025-10-28 16:13:09'),(7,6,'Pending',25.98,'2025-10-28 16:17:58'),(8,6,'Pending',25.98,'2025-10-28 16:22:51'),(9,6,'Pending',129.90,'2025-10-28 16:35:45'),(10,1,'Pending',129.90,'2025-10-28 16:38:00'),(11,6,'Pending',25.98,'2025-10-28 22:38:03'),(12,6,'Pending',25.98,'2025-10-30 10:19:25'),(13,6,'Pending',25.98,'2025-10-30 10:19:29'),(14,6,'Pending',25.98,'2025-10-30 10:19:30'),(15,6,'Pending',25.98,'2025-10-30 10:19:31'),(16,6,'Pending',25.98,'2025-10-30 10:19:31'),(17,6,'Pending',25.98,'2025-10-30 10:19:32'),(18,6,'Pending',25.98,'2025-10-30 10:19:33'),(19,6,'Pending',25.98,'2025-10-30 10:19:33'),(20,6,'Pending',25.98,'2025-10-30 10:19:33'),(21,6,'Pending',25.98,'2025-10-30 10:19:33'),(22,6,'Pending',25.98,'2025-10-30 10:19:33'),(23,6,'Pending',25.98,'2025-10-30 10:19:33'),(24,6,'Pending',25.98,'2025-10-30 10:19:34'),(25,6,'Pending',25.98,'2025-10-30 10:25:04'),(26,6,'Pending',129.90,'2025-10-30 10:27:28'),(27,27,'Pending',129.90,'2025-10-30 10:28:26'),(28,27,'Pending',129.90,'2025-10-30 10:28:28'),(29,27,'Pending',129.90,'2025-10-30 19:06:43'),(30,27,'Pending',129.90,'2025-10-30 19:09:50'),(31,27,'Pending',129.90,'2025-10-30 19:10:39');
+INSERT INTO `orders` VALUES (1,1,'Completed',154.89,'2025-10-28 14:20:54'),(2,2,'Processing',59.90,'2025-10-28 14:20:54'),(3,3,'Paid',308.50,'2025-10-28 14:20:54'),(4,4,'Cancelled',24.99,'2025-10-28 14:20:54'),(5,5,'Completed',189.00,'2025-10-28 14:20:54'),(6,6,'Pending',25.98,'2025-10-28 16:13:09'),(7,6,'Pending',25.98,'2025-10-28 16:17:58'),(8,6,'Pending',25.98,'2025-10-28 16:22:51'),(9,6,'Pending',129.90,'2025-10-28 16:35:45'),(10,1,'Pending',129.90,'2025-10-28 16:38:00'),(11,6,'Pending',25.98,'2025-10-28 22:38:03'),(12,6,'Pending',25.98,'2025-10-30 10:19:25'),(13,6,'Pending',25.98,'2025-10-30 10:19:29'),(14,6,'Pending',25.98,'2025-10-30 10:19:30'),(15,6,'Pending',25.98,'2025-10-30 10:19:31'),(16,6,'Pending',25.98,'2025-10-30 10:19:31'),(17,6,'Pending',25.98,'2025-10-30 10:19:32'),(18,6,'Pending',25.98,'2025-10-30 10:19:33'),(19,6,'Pending',25.98,'2025-10-30 10:19:33'),(20,6,'Pending',25.98,'2025-10-30 10:19:33'),(21,6,'Pending',25.98,'2025-10-30 10:19:33'),(22,6,'Pending',25.98,'2025-10-30 10:19:33'),(23,6,'Pending',25.98,'2025-10-30 10:19:33'),(24,6,'Pending',25.98,'2025-10-30 10:19:34'),(25,6,'Pending',25.98,'2025-10-30 10:25:04'),(26,6,'Pending',129.90,'2025-10-30 10:27:28'),(27,27,'Pending',129.90,'2025-10-30 10:28:26'),(28,27,'Pending',129.90,'2025-10-30 10:28:28'),(29,27,'Pending',129.90,'2025-10-30 19:06:43'),(30,27,'Pending',129.90,'2025-10-30 19:09:50'),(31,27,'Pending',129.90,'2025-10-30 19:10:39'),(32,27,'Pending',129.90,'2025-10-30 19:33:01');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,7 +92,7 @@ CREATE TABLE `payments` (
   PRIMARY KEY (`id`),
   KEY `order_id` (`order_id`),
   CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,7 +101,7 @@ CREATE TABLE `payments` (
 
 LOCK TABLES `payments` WRITE;
 /*!40000 ALTER TABLE `payments` DISABLE KEYS */;
-INSERT INTO `payments` VALUES (1,1,'Credit Card','Successful',154.89,'2025-10-28 14:21:01'),(2,2,'Credit Card','Pending',59.90,'2025-10-28 14:21:01'),(3,3,'Credit Card','Successful',308.50,'2025-10-28 14:21:01'),(4,4,'Credit Card','Cancelled',24.99,'2025-10-28 14:21:01'),(5,5,'Credit Card','Successful',189.00,'2025-10-28 14:21:01'),(6,10,'Credit Card','Successful',129.90,'2025-10-28 16:38:00'),(7,26,'Credit Card','Successful',129.90,'2025-10-30 10:27:28'),(8,27,'Credit Card','Successful',129.90,'2025-10-30 10:28:26'),(9,28,'Credit Card','Successful',129.90,'2025-10-30 10:28:28'),(10,29,'Credit Card','Successful',129.90,'2025-10-30 19:06:43'),(11,30,'Credit Card','Successful',129.90,'2025-10-30 19:09:50'),(12,31,'Credit Card','Successful',129.90,'2025-10-30 19:10:39');
+INSERT INTO `payments` VALUES (1,1,'Credit Card','Successful',154.89,'2025-10-28 14:21:01'),(2,2,'Credit Card','Pending',59.90,'2025-10-28 14:21:01'),(3,3,'Credit Card','Successful',308.50,'2025-10-28 14:21:01'),(4,4,'Credit Card','Cancelled',24.99,'2025-10-28 14:21:01'),(5,5,'Credit Card','Successful',189.00,'2025-10-28 14:21:01'),(6,10,'Credit Card','Successful',129.90,'2025-10-28 16:38:00'),(7,26,'Credit Card','Successful',129.90,'2025-10-30 10:27:28'),(8,27,'Credit Card','Successful',129.90,'2025-10-30 10:28:26'),(9,28,'Credit Card','Successful',129.90,'2025-10-30 10:28:28'),(10,29,'Credit Card','Successful',129.90,'2025-10-30 19:06:43'),(11,30,'Credit Card','Successful',129.90,'2025-10-30 19:09:50'),(12,31,'Credit Card','Successful',129.90,'2025-10-30 19:10:39'),(13,32,'Credit Card','Successful',129.90,'2025-10-30 19:33:01');
 /*!40000 ALTER TABLE `payments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,7 +118,7 @@ CREATE TABLE `products` (
   `brand` varchar(50) DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,7 +127,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Nike Tech Fleece Hoodie','Nike',129.90),(2,'Adidas Essentials Tracksuit','Adidas',119.50),(3,'Zara Slim Fit Jeans','Zara',59.90),(4,'H&M Oversized T-Shirt','H&M',24.99),(5,'The North Face Puffer Jacket','The North Face',189.00),(6,'Nike Tech Fleece Hoodie','Nike',129.90),(7,'Nike Tech Fleece Hoodie','Nike',129.90),(8,'Nike Tech Fleece Hoodie','Nike',129.90),(9,'Nike Tech Fleece Hoodie','Nike',129.90),(10,'Nike Tech Fleece Hoodie','Nike',129.90),(11,'Nike Tech Fleece Hoodie','Nike',129.90),(12,'Nike Tech Fleece Hoodie','Nike',129.90),(13,'Najjaci najk','Nike',129.90);
+INSERT INTO `products` VALUES (1,'Nike Tech Fleece Hoodie','Nike',129.90),(2,'Adidas Essentials Tracksuit','Adidas',119.50),(3,'Zara Slim Fit Jeans','Zara',59.90),(4,'H&M Oversized T-Shirt','H&M',24.99),(5,'The North Face Puffer Jacket','The North Face',189.00),(6,'Nike Tech Fleece Hoodie','Nike',129.90),(7,'Nike Tech Fleece Hoodie','Nike',129.90),(8,'Nike Tech Fleece Hoodie','Nike',129.90),(9,'Nike Tech Fleece Hoodie','Nike',129.90),(10,'Nike Tech Fleece Hoodie','Nike',129.90),(11,'Nike Tech Fleece Hoodie','Nike',129.90),(12,'Nike Tech Fleece Hoodie','Nike',129.90),(13,'Najjaci najk','Nike',129.90),(14,'Najjaci najk','Nike',129.90);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +145,7 @@ CREATE TABLE `users` (
   `email` varchar(100) DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +154,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Faris','Hodzic','faris.hodzic@gmail.com','2025-10-28 14:20:39'),(2,'Tarik','Mehic','tarik.mehic@gmail.com','2025-10-28 14:20:39'),(3,'Amna','Halilovic','amna.halilovic@gmail.com','2025-10-28 14:20:39'),(4,'Lejla','Karic','lejla.karic@gmail.com','2025-10-28 14:20:39'),(5,'Muhamed','Selimovic','muhamed.selimovic@gmail.com','2025-10-28 14:20:39'),(6,'John','Doe','john.doe@gmail.com','2025-10-28 16:13:09'),(7,'John','Doe','john.doe@gmail.com','2025-10-28 16:17:58'),(8,'John','Doe','john.doe@gmail.com','2025-10-28 16:22:51'),(9,'John','Doe','john.doe@gmail.com','2025-10-28 16:35:45'),(10,'Faris','Hodzic','faris.hodzic@gmail.com','2025-10-28 16:38:00'),(11,'John','Doe','john.doe@gmail.com','2025-10-28 22:38:03'),(12,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:25'),(13,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:29'),(14,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:30'),(15,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:31'),(16,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:31'),(17,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:32'),(18,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:33'),(19,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:33'),(20,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:33'),(21,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:33'),(22,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:33'),(23,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:33'),(24,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:34'),(25,'John','Doe','john.doe@gmail.com','2025-10-30 10:25:04'),(26,'John','Doe','john.doe@gmail.com','2025-10-30 10:27:28'),(27,'Pasovic','Faris','pasovic.faris@gmail.com','2025-10-30 10:28:25'),(28,'Pasovic','Faris','pasovic.faris@gmail.com','2025-10-30 10:28:28'),(29,'Pasovic','Faris','pasovic.faris@gmail.com','2025-10-30 19:06:43'),(30,'Faris','Faris','pasovic.faris@gmail.com','2025-10-30 19:09:50'),(31,'Faris','Faris','pasovic.faris@gmail.com','2025-10-30 19:10:39');
+INSERT INTO `users` VALUES (1,'Faris','Hodzic','faris.hodzic@gmail.com','2025-10-28 14:20:39'),(2,'Tarik','Mehic','tarik.mehic@gmail.com','2025-10-28 14:20:39'),(3,'Amna','Halilovic','amna.halilovic@gmail.com','2025-10-28 14:20:39'),(4,'Lejla','Karic','lejla.karic@gmail.com','2025-10-28 14:20:39'),(5,'Muhamed','Selimovic','muhamed.selimovic@gmail.com','2025-10-28 14:20:39'),(6,'John','Doe','john.doe@gmail.com','2025-10-28 16:13:09'),(7,'John','Doe','john.doe@gmail.com','2025-10-28 16:17:58'),(8,'John','Doe','john.doe@gmail.com','2025-10-28 16:22:51'),(9,'John','Doe','john.doe@gmail.com','2025-10-28 16:35:45'),(10,'Faris','Hodzic','faris.hodzic@gmail.com','2025-10-28 16:38:00'),(11,'John','Doe','john.doe@gmail.com','2025-10-28 22:38:03'),(12,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:25'),(13,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:29'),(14,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:30'),(15,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:31'),(16,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:31'),(17,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:32'),(18,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:33'),(19,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:33'),(20,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:33'),(21,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:33'),(22,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:33'),(23,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:33'),(24,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:34'),(25,'John','Doe','john.doe@gmail.com','2025-10-30 10:25:04'),(26,'John','Doe','john.doe@gmail.com','2025-10-30 10:27:28'),(27,'Pasovic','Faris','pasovic.faris@gmail.com','2025-10-30 10:28:25'),(28,'Pasovic','Faris','pasovic.faris@gmail.com','2025-10-30 10:28:28'),(29,'Pasovic','Faris','pasovic.faris@gmail.com','2025-10-30 19:06:43'),(30,'Faris','Faris','pasovic.faris@gmail.com','2025-10-30 19:09:50'),(31,'Faris','Faris','pasovic.faris@gmail.com','2025-10-30 19:10:39'),(32,'Faris','Faris','pasovic.faris@gmail.com','2025-10-30 19:33:01');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,4 +171,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-30 19:16:47
+-- Dump completed on 2025-10-30 19:34:08
