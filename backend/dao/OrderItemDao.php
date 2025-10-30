@@ -6,11 +6,14 @@
         parent::__construct('orderItems');
     }
 
-    public function getByOrderId(int $orderId): array {
-        $stmt = $this->connection->prepare("SELECT * FROM `orderItems` WHERE order_id = :orderId");
-        $stmt->bindParam(':orderId', $orderId, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
+  public function getByQuantity(int $quantity): array {
+    $stmt = $this->connection->prepare("
+      SELECT * FROM orderItems
+      WHERE quantity = :quantity
+    ");
+    $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll();
+  }
     }
     ?>

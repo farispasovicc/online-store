@@ -62,7 +62,7 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,1,'Completed',154.89,'2025-10-28 14:20:54'),(2,2,'Processing',59.90,'2025-10-28 14:20:54'),(3,3,'Paid',308.50,'2025-10-28 14:20:54'),(4,4,'Cancelled',24.99,'2025-10-28 14:20:54'),(5,5,'Completed',189.00,'2025-10-28 14:20:54'),(6,6,'Pending',25.98,'2025-10-28 16:13:09'),(7,6,'Pending',25.98,'2025-10-28 16:17:58'),(8,6,'Pending',25.98,'2025-10-28 16:22:51'),(9,6,'Pending',129.90,'2025-10-28 16:35:45'),(10,1,'Pending',129.90,'2025-10-28 16:38:00');
+INSERT INTO `orders` VALUES (1,1,'Completed',154.89,'2025-10-28 14:20:54'),(2,2,'Processing',59.90,'2025-10-28 14:20:54'),(3,3,'Paid',308.50,'2025-10-28 14:20:54'),(4,4,'Cancelled',24.99,'2025-10-28 14:20:54'),(5,5,'Completed',189.00,'2025-10-28 14:20:54'),(6,6,'Pending',25.98,'2025-10-28 16:13:09'),(7,6,'Pending',25.98,'2025-10-28 16:17:58'),(8,6,'Pending',25.98,'2025-10-28 16:22:51'),(9,6,'Pending',129.90,'2025-10-28 16:35:45'),(10,1,'Pending',129.90,'2025-10-28 16:38:00'),(11,6,'Pending',25.98,'2025-10-28 22:38:03'),(12,6,'Pending',25.98,'2025-10-30 10:19:25'),(13,6,'Pending',25.98,'2025-10-30 10:19:29'),(14,6,'Pending',25.98,'2025-10-30 10:19:30'),(15,6,'Pending',25.98,'2025-10-30 10:19:31'),(16,6,'Pending',25.98,'2025-10-30 10:19:31'),(17,6,'Pending',25.98,'2025-10-30 10:19:32'),(18,6,'Pending',25.98,'2025-10-30 10:19:33'),(19,6,'Pending',25.98,'2025-10-30 10:19:33'),(20,6,'Pending',25.98,'2025-10-30 10:19:33'),(21,6,'Pending',25.98,'2025-10-30 10:19:33'),(22,6,'Pending',25.98,'2025-10-30 10:19:33'),(23,6,'Pending',25.98,'2025-10-30 10:19:33'),(24,6,'Pending',25.98,'2025-10-30 10:19:34');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +145,7 @@ CREATE TABLE `users` (
   `email` varchar(100) DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +154,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Faris','Hodzic','faris.hodzic@gmail.com','2025-10-28 14:20:39'),(2,'Tarik','Mehic','tarik.mehic@gmail.com','2025-10-28 14:20:39'),(3,'Amna','Halilovic','amna.halilovic@gmail.com','2025-10-28 14:20:39'),(4,'Lejla','Karic','lejla.karic@gmail.com','2025-10-28 14:20:39'),(5,'Muhamed','Selimovic','muhamed.selimovic@gmail.com','2025-10-28 14:20:39'),(6,'John','Doe','john.doe@gmail.com','2025-10-28 16:13:09'),(7,'John','Doe','john.doe@gmail.com','2025-10-28 16:17:58'),(8,'John','Doe','john.doe@gmail.com','2025-10-28 16:22:51'),(9,'John','Doe','john.doe@gmail.com','2025-10-28 16:35:45'),(10,'Faris','Hodzic','faris.hodzic@gmail.com','2025-10-28 16:38:00');
+INSERT INTO `users` VALUES (1,'Faris','Hodzic','faris.hodzic@gmail.com','2025-10-28 14:20:39'),(2,'Tarik','Mehic','tarik.mehic@gmail.com','2025-10-28 14:20:39'),(3,'Amna','Halilovic','amna.halilovic@gmail.com','2025-10-28 14:20:39'),(4,'Lejla','Karic','lejla.karic@gmail.com','2025-10-28 14:20:39'),(5,'Muhamed','Selimovic','muhamed.selimovic@gmail.com','2025-10-28 14:20:39'),(6,'John','Doe','john.doe@gmail.com','2025-10-28 16:13:09'),(7,'John','Doe','john.doe@gmail.com','2025-10-28 16:17:58'),(8,'John','Doe','john.doe@gmail.com','2025-10-28 16:22:51'),(9,'John','Doe','john.doe@gmail.com','2025-10-28 16:35:45'),(10,'Faris','Hodzic','faris.hodzic@gmail.com','2025-10-28 16:38:00'),(11,'John','Doe','john.doe@gmail.com','2025-10-28 22:38:03'),(12,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:25'),(13,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:29'),(14,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:30'),(15,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:31'),(16,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:31'),(17,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:32'),(18,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:33'),(19,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:33'),(20,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:33'),(21,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:33'),(22,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:33'),(23,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:33'),(24,'John','Doe','john.doe@gmail.com','2025-10-30 10:19:34');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,4 +171,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-28 22:20:56
+-- Dump completed on 2025-10-30 10:22:04
