@@ -14,6 +14,20 @@ var AuthService = {
     );
   },
 
+  register: function (email, password) {
+    RestClient.post(
+      "auth/register",
+      { email: email, password: password },
+      function () {
+        alert("Registration successful. Please log in.");
+        window.location.hash = "#login";
+      },
+      function (xhr) {
+        alert(xhr.responseText || "Registration failed");
+      }
+    );
+  },
+
   logout: function () {
     localStorage.removeItem(Constants.TOKEN_KEY);
     localStorage.removeItem("user");
