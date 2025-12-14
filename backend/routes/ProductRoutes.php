@@ -13,9 +13,17 @@
  * )
  */
 Flight::route('GET /products', function () {
+
+
     Flight::auth_middleware()->verifyToken(
         Flight::request()->getHeader("Authentication")
     );
+
+
+    Flight::auth_middleware()->authorizeRoles([
+        Roles::ADMIN,
+        Roles::USER
+    ]);
 
     Flight::json(Flight::productService()->getAll());
 });
@@ -41,9 +49,17 @@ Flight::route('GET /products', function () {
  * )
  */
 Flight::route('GET /products/@id', function ($id) {
+
+
     Flight::auth_middleware()->verifyToken(
         Flight::request()->getHeader("Authentication")
     );
+
+
+    Flight::auth_middleware()->authorizeRoles([
+        Roles::ADMIN,
+        Roles::USER
+    ]);
 
     Flight::json(Flight::productService()->getById($id));
 });
@@ -71,9 +87,14 @@ Flight::route('GET /products/@id', function ($id) {
  * )
  */
 Flight::route('POST /products', function () {
+
+
     Flight::auth_middleware()->verifyToken(
         Flight::request()->getHeader("Authentication")
     );
+
+
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
 
     $data = Flight::request()->data->getData();
     Flight::json(Flight::productService()->createProduct($data));
@@ -109,9 +130,13 @@ Flight::route('POST /products', function () {
  * )
  */
 Flight::route('PUT /products/@id', function ($id) {
+
+
     Flight::auth_middleware()->verifyToken(
         Flight::request()->getHeader("Authentication")
     );
+
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
 
     $data = Flight::request()->data->getData();
     Flight::json(Flight::productService()->update($id, $data));
@@ -138,10 +163,14 @@ Flight::route('PUT /products/@id', function ($id) {
  * )
  */
 Flight::route('DELETE /products/@id', function ($id) {
+
+
     Flight::auth_middleware()->verifyToken(
         Flight::request()->getHeader("Authentication")
     );
 
+
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
+
     Flight::json(Flight::productService()->delete($id));
 });
-?>

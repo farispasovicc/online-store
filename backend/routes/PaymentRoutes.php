@@ -13,9 +13,17 @@
  * )
  */
 Flight::route('GET /payments', function () {
+
+
     Flight::auth_middleware()->verifyToken(
         Flight::request()->getHeader("Authentication")
     );
+
+
+    Flight::auth_middleware()->authorizeRoles([
+        Roles::ADMIN,
+        Roles::USER
+    ]);
 
     Flight::json(Flight::paymentService()->getAll());
 });
@@ -41,9 +49,17 @@ Flight::route('GET /payments', function () {
  * )
  */
 Flight::route('GET /payments/@id', function ($id) {
+
+
     Flight::auth_middleware()->verifyToken(
         Flight::request()->getHeader("Authentication")
     );
+
+
+    Flight::auth_middleware()->authorizeRoles([
+        Roles::ADMIN,
+        Roles::USER
+    ]);
 
     Flight::json(Flight::paymentService()->getById($id));
 });
@@ -73,9 +89,14 @@ Flight::route('GET /payments/@id', function ($id) {
  * )
  */
 Flight::route('POST /payments', function () {
+
+
     Flight::auth_middleware()->verifyToken(
         Flight::request()->getHeader("Authentication")
     );
+
+
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
 
     $data = Flight::request()->data->getData();
     Flight::json(Flight::paymentService()->createPayment($data));
@@ -113,9 +134,14 @@ Flight::route('POST /payments', function () {
  * )
  */
 Flight::route('PUT /payments/@id', function ($id) {
+
+
     Flight::auth_middleware()->verifyToken(
         Flight::request()->getHeader("Authentication")
     );
+
+
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
 
     $data = Flight::request()->data->getData();
     Flight::json(Flight::paymentService()->update($id, $data));
@@ -142,9 +168,15 @@ Flight::route('PUT /payments/@id', function ($id) {
  * )
  */
 Flight::route('DELETE /payments/@id', function ($id) {
+
+
     Flight::auth_middleware()->verifyToken(
         Flight::request()->getHeader("Authentication")
     );
 
+
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
+
     Flight::json(Flight::paymentService()->delete($id));
 });
+?>
