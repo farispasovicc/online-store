@@ -1,24 +1,32 @@
 <?php
+
 /**
  * @OA\Get(
  *     path="/users",
  *     tags={"Users"},
  *     summary="Get all users",
+ *     security={{"ApiKey": {}}},
  *     @OA\Response(
  *         response=200,
  *         description="List of all users"
  *     )
  * )
  */
-Flight::route('GET /users', function() {
+Flight::route('GET /users', function () {
+    Flight::auth_middleware()->verifyToken(
+        Flight::request()->getHeader("Authentication")
+    );
+
     Flight::json(Flight::userService()->getAll());
 });
+
 
 /**
  * @OA\Get(
  *     path="/users/{id}",
  *     tags={"Users"},
  *     summary="Get user by ID",
+ *     security={{"ApiKey": {}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -32,15 +40,21 @@ Flight::route('GET /users', function() {
  *     )
  * )
  */
-Flight::route('GET /users/@id', function($id) {
+Flight::route('GET /users/@id', function ($id) {
+    Flight::auth_middleware()->verifyToken(
+        Flight::request()->getHeader("Authentication")
+    );
+
     Flight::json(Flight::userService()->getById($id));
 });
+
 
 /**
  * @OA\Post(
  *     path="/users",
  *     tags={"Users"},
  *     summary="Create a new user",
+ *     security={{"ApiKey": {}}},
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
@@ -57,16 +71,22 @@ Flight::route('GET /users/@id', function($id) {
  *     )
  * )
  */
-Flight::route('POST /users', function() {
+Flight::route('POST /users', function () {
+    Flight::auth_middleware()->verifyToken(
+        Flight::request()->getHeader("Authentication")
+    );
+
     $data = Flight::request()->data->getData();
     Flight::json(Flight::userService()->createUser($data));
 });
+
 
 /**
  * @OA\Put(
  *     path="/users/{id}",
  *     tags={"Users"},
  *     summary="Update user by ID",
+ *     security={{"ApiKey": {}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -90,16 +110,22 @@ Flight::route('POST /users', function() {
  *     )
  * )
  */
-Flight::route('PUT /users/@id', function($id) {
+Flight::route('PUT /users/@id', function ($id) {
+    Flight::auth_middleware()->verifyToken(
+        Flight::request()->getHeader("Authentication")
+    );
+
     $data = Flight::request()->data->getData();
     Flight::json(Flight::userService()->updateUser($id, $data));
 });
+
 
 /**
  * @OA\Delete(
  *     path="/users/{id}",
  *     tags={"Users"},
  *     summary="Delete user by ID",
+ *     security={{"ApiKey": {}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -113,7 +139,10 @@ Flight::route('PUT /users/@id', function($id) {
  *     )
  * )
  */
-Flight::route('DELETE /users/@id', function($id) {
+Flight::route('DELETE /users/@id', function ($id) {
+    Flight::auth_middleware()->verifyToken(
+        Flight::request()->getHeader("Authentication")
+    );
+
     Flight::json(Flight::userService()->deleteUser($id));
 });
-?>
