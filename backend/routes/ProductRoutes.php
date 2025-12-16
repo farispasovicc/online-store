@@ -1,24 +1,40 @@
 <?php
+
 /**
  * @OA\Get(
  *     path="/products",
  *     tags={"Products"},
  *     summary="Get all products",
+ *     security={{"ApiKey": {}}},
  *     @OA\Response(
  *         response=200,
  *         description="List of all products"
  *     )
  * )
  */
-Flight::route('GET /products', function() {
+Flight::route('GET /products', function () {
+
+
+    Flight::auth_middleware()->verifyToken(
+        Flight::request()->getHeader("Authentication")
+    );
+
+
+    Flight::auth_middleware()->authorizeRoles([
+        Roles::ADMIN,
+        Roles::USER
+    ]);
+
     Flight::json(Flight::productService()->getAll());
 });
+
 
 /**
  * @OA\Get(
  *     path="/products/{id}",
  *     tags={"Products"},
  *     summary="Get product by ID",
+ *     security={{"ApiKey": {}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -32,15 +48,29 @@ Flight::route('GET /products', function() {
  *     )
  * )
  */
-Flight::route('GET /products/@id', function($id) {
+Flight::route('GET /products/@id', function ($id) {
+
+
+    Flight::auth_middleware()->verifyToken(
+        Flight::request()->getHeader("Authentication")
+    );
+
+
+    Flight::auth_middleware()->authorizeRoles([
+        Roles::ADMIN,
+        Roles::USER
+    ]);
+
     Flight::json(Flight::productService()->getById($id));
 });
+
 
 /**
  * @OA\Post(
  *     path="/products",
  *     tags={"Products"},
  *     summary="Create a new product",
+ *     security={{"ApiKey": {}}},
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
@@ -56,16 +86,27 @@ Flight::route('GET /products/@id', function($id) {
  *     )
  * )
  */
-Flight::route('POST /products', function() {
+Flight::route('POST /products', function () {
+
+
+    Flight::auth_middleware()->verifyToken(
+        Flight::request()->getHeader("Authentication")
+    );
+
+
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
+
     $data = Flight::request()->data->getData();
     Flight::json(Flight::productService()->createProduct($data));
 });
+
 
 /**
  * @OA\Put(
  *     path="/products/{id}",
  *     tags={"Products"},
  *     summary="Update product by ID",
+ *     security={{"ApiKey": {}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -88,16 +129,26 @@ Flight::route('POST /products', function() {
  *     )
  * )
  */
-Flight::route('PUT /products/@id', function($id) {
+Flight::route('PUT /products/@id', function ($id) {
+
+
+    Flight::auth_middleware()->verifyToken(
+        Flight::request()->getHeader("Authentication")
+    );
+
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
+
     $data = Flight::request()->data->getData();
     Flight::json(Flight::productService()->update($id, $data));
 });
+
 
 /**
  * @OA\Delete(
  *     path="/products/{id}",
  *     tags={"Products"},
  *     summary="Delete product by ID",
+ *     security={{"ApiKey": {}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -111,7 +162,15 @@ Flight::route('PUT /products/@id', function($id) {
  *     )
  * )
  */
-Flight::route('DELETE /products/@id', function($id) {
+Flight::route('DELETE /products/@id', function ($id) {
+
+
+    Flight::auth_middleware()->verifyToken(
+        Flight::request()->getHeader("Authentication")
+    );
+
+
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
+
     Flight::json(Flight::productService()->delete($id));
 });
-?>

@@ -1,24 +1,40 @@
 <?php
+
 /**
  * @OA\Get(
  *     path="/order-items",
  *     tags={"Order Items"},
  *     summary="Get all order items",
+ *     security={{"ApiKey": {}}},
  *     @OA\Response(
  *         response=200,
  *         description="List of all order items"
  *     )
  * )
  */
-Flight::route('GET /order-items', function() {
+Flight::route('GET /order-items', function () {
+
+
+    Flight::auth_middleware()->verifyToken(
+        Flight::request()->getHeader("Authentication")
+    );
+
+
+    Flight::auth_middleware()->authorizeRoles([
+        Roles::ADMIN,
+        Roles::USER
+    ]);
+
     Flight::json(Flight::orderItemService()->getAll());
 });
+
 
 /**
  * @OA\Get(
  *     path="/order-items/{id}",
  *     tags={"Order Items"},
  *     summary="Get order item by ID",
+ *     security={{"ApiKey": {}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -32,15 +48,29 @@ Flight::route('GET /order-items', function() {
  *     )
  * )
  */
-Flight::route('GET /order-items/@id', function($id) {
+Flight::route('GET /order-items/@id', function ($id) {
+
+
+    Flight::auth_middleware()->verifyToken(
+        Flight::request()->getHeader("Authentication")
+    );
+
+
+    Flight::auth_middleware()->authorizeRoles([
+        Roles::ADMIN,
+        Roles::USER
+    ]);
+
     Flight::json(Flight::orderItemService()->getById($id));
 });
+
 
 /**
  * @OA\Post(
  *     path="/order-items",
  *     tags={"Order Items"},
  *     summary="Create a new order item",
+ *     security={{"ApiKey": {}}},
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
@@ -57,16 +87,27 @@ Flight::route('GET /order-items/@id', function($id) {
  *     )
  * )
  */
-Flight::route('POST /order-items', function() {
+Flight::route('POST /order-items', function () {
+
+
+    Flight::auth_middleware()->verifyToken(
+        Flight::request()->getHeader("Authentication")
+    );
+
+
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
+
     $data = Flight::request()->data->getData();
     Flight::json(Flight::orderItemService()->createOrderItem($data));
 });
+
 
 /**
  * @OA\Put(
  *     path="/order-items/{id}",
  *     tags={"Order Items"},
  *     summary="Update order item by ID",
+ *     security={{"ApiKey": {}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -90,16 +131,27 @@ Flight::route('POST /order-items', function() {
  *     )
  * )
  */
-Flight::route('PUT /order-items/@id', function($id) {
+Flight::route('PUT /order-items/@id', function ($id) {
+
+
+    Flight::auth_middleware()->verifyToken(
+        Flight::request()->getHeader("Authentication")
+    );
+
+
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
+
     $data = Flight::request()->data->getData();
     Flight::json(Flight::orderItemService()->update($id, $data));
 });
+
 
 /**
  * @OA\Delete(
  *     path="/order-items/{id}",
  *     tags={"Order Items"},
  *     summary="Delete order item by ID",
+ *     security={{"ApiKey": {}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -113,7 +165,15 @@ Flight::route('PUT /order-items/@id', function($id) {
  *     )
  * )
  */
-Flight::route('DELETE /order-items/@id', function($id) {
+Flight::route('DELETE /order-items/@id', function ($id) {
+
+
+    Flight::auth_middleware()->verifyToken(
+        Flight::request()->getHeader("Authentication")
+    );
+
+
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
+
     Flight::json(Flight::orderItemService()->delete($id));
 });
-?>

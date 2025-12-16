@@ -1,24 +1,40 @@
 <?php
+
 /**
  * @OA\Get(
  *     path="/payments",
  *     tags={"Payments"},
  *     summary="Get all payments",
+ *     security={{"ApiKey": {}}},
  *     @OA\Response(
  *         response=200,
  *         description="List of all payments"
  *     )
  * )
  */
-Flight::route('GET /payments', function() {
+Flight::route('GET /payments', function () {
+
+
+    Flight::auth_middleware()->verifyToken(
+        Flight::request()->getHeader("Authentication")
+    );
+
+
+    Flight::auth_middleware()->authorizeRoles([
+        Roles::ADMIN,
+        Roles::USER
+    ]);
+
     Flight::json(Flight::paymentService()->getAll());
 });
+
 
 /**
  * @OA\Get(
  *     path="/payments/{id}",
  *     tags={"Payments"},
  *     summary="Get payment by ID",
+ *     security={{"ApiKey": {}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -32,15 +48,29 @@ Flight::route('GET /payments', function() {
  *     )
  * )
  */
-Flight::route('GET /payments/@id', function($id) {
+Flight::route('GET /payments/@id', function ($id) {
+
+
+    Flight::auth_middleware()->verifyToken(
+        Flight::request()->getHeader("Authentication")
+    );
+
+
+    Flight::auth_middleware()->authorizeRoles([
+        Roles::ADMIN,
+        Roles::USER
+    ]);
+
     Flight::json(Flight::paymentService()->getById($id));
 });
+
 
 /**
  * @OA\Post(
  *     path="/payments",
  *     tags={"Payments"},
  *     summary="Create a new payment",
+ *     security={{"ApiKey": {}}},
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
@@ -58,16 +88,27 @@ Flight::route('GET /payments/@id', function($id) {
  *     )
  * )
  */
-Flight::route('POST /payments', function() {
+Flight::route('POST /payments', function () {
+
+
+    Flight::auth_middleware()->verifyToken(
+        Flight::request()->getHeader("Authentication")
+    );
+
+
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
+
     $data = Flight::request()->data->getData();
     Flight::json(Flight::paymentService()->createPayment($data));
 });
+
 
 /**
  * @OA\Put(
  *     path="/payments/{id}",
  *     tags={"Payments"},
  *     summary="Update payment by ID",
+ *     security={{"ApiKey": {}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -92,16 +133,27 @@ Flight::route('POST /payments', function() {
  *     )
  * )
  */
-Flight::route('PUT /payments/@id', function($id) {
+Flight::route('PUT /payments/@id', function ($id) {
+
+
+    Flight::auth_middleware()->verifyToken(
+        Flight::request()->getHeader("Authentication")
+    );
+
+
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
+
     $data = Flight::request()->data->getData();
     Flight::json(Flight::paymentService()->update($id, $data));
 });
+
 
 /**
  * @OA\Delete(
  *     path="/payments/{id}",
  *     tags={"Payments"},
  *     summary="Delete payment by ID",
+ *     security={{"ApiKey": {}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -115,7 +167,16 @@ Flight::route('PUT /payments/@id', function($id) {
  *     )
  * )
  */
-Flight::route('DELETE /payments/@id', function($id) {
+Flight::route('DELETE /payments/@id', function ($id) {
+
+
+    Flight::auth_middleware()->verifyToken(
+        Flight::request()->getHeader("Authentication")
+    );
+
+
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
+
     Flight::json(Flight::paymentService()->delete($id));
 });
 ?>
