@@ -1,36 +1,36 @@
 var AuthService = {
-  login: function (email, password) {
+  login: function (email, password, callback, error_callback) {
     RestClient.post(
       "auth/login",
       { email: email, password: password },
       function (response) {
-        localStorage.setItem(Constants.TOKEN_KEY, response.data.token);
-        localStorage.setItem("user", JSON.stringify(response.data));
-        window.location.hash = "#home";
+        if (response && response.data && response.data.token) {
+          localStorage.setItem(Constants.TOKEN_KEY, response.data.token);
+        }
+        if (callback) callback(response);
       },
-      function () {
-        alert("Login failed");
+      function (xhr) {
+        if (error_callback) error_callback(xhr);
+        else alert("Login failed");
       }
     );
   },
 
-  register: function (email, password) {
+  register: function (payload, callback, error_callback) {
     RestClient.post(
       "auth/register",
-      { email: email, password: password },
-      function () {
-        alert("Registration successful. Please log in.");
-        window.location.hash = "#login";
+      payload,
+      function (response) {
+        if (callback) callback(response);
       },
       function (xhr) {
-        alert(xhr.responseText || "Registration failed");
+        if (error_callback) error_callback(xhr);
+        else alert(xhr.responseText || "Registration failed");
       }
     );
   },
 
   logout: function () {
     localStorage.removeItem(Constants.TOKEN_KEY);
-    localStorage.removeItem("user");
-    window.location.hash = "#login";
   }
 };
