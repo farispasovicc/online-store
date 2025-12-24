@@ -32,6 +32,12 @@ Flight::group('/auth', function() {
      *                     type="string",
      *                     example="demo@gmail.com",
      *                     description="User email"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="phone",
+     *                     type="string",
+     *                     example="+38761111222",
+     *                     description="User phone number"
      *                 )
      *             )
      *         )
@@ -39,6 +45,14 @@ Flight::group('/auth', function() {
      *     @OA\Response(
      *         response=200,
      *         description="User has been added."
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Validation error."
+     *     ),
+     *     @OA\Response(
+     *         response=409,
+     *         description="Email already exists."
      *     ),
      *     @OA\Response(
      *         response=500,
@@ -50,14 +64,15 @@ Flight::group('/auth', function() {
         $data = Flight::request()->data->getData();
 
         $response = Flight::auth_service()->register($data);
-    
+
         if ($response['success']) {
             Flight::json([
                 'message' => 'User registered successfully',
                 'data' => $response['data']
             ]);
         } else {
-            Flight::halt(500, $response['error']);
+            $code = isset($response['code']) ? $response['code'] : 400;
+            Flight::halt($code, $response['error']);
         }
     });
 
@@ -69,6 +84,14 @@ Flight::group('/auth', function() {
      *      @OA\Response(
      *           response=200,
      *           description="User data and JWT"
+     *      ),
+     *      @OA\Response(
+     *           response=400,
+     *           description="Validation error."
+     *      ),
+     *      @OA\Response(
+     *           response=401,
+     *           description="Invalid credentials."
      *      ),
      *      @OA\RequestBody(
      *          description="Credentials",
@@ -91,7 +114,8 @@ Flight::group('/auth', function() {
                 'data' => $response['data']
             ]);
         } else {
-            Flight::halt(500, $response['error']);
+            $code = isset($response['code']) ? $response['code'] : 401;
+            Flight::halt($code, $response['error']);
         }
     });
 });

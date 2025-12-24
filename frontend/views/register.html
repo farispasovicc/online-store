@@ -6,7 +6,7 @@
       </div>
 
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-        <form id="register-form" onsubmit="return false;">
+        <form id="register-form" novalidate>
           <div class="divider d-flex align-items-center my-4">
             <p class="text-center fw-bold mx-3 mb-0">REGISTER</p>
           </div>
@@ -15,55 +15,62 @@
             <input
               type="email"
               id="register-email"
+              name="email"
               class="form-control form-control-lg"
               placeholder="Enter a valid email address"
               required
             />
-            <label class="form-label" for="register-email">Email address</label>
+
           </div>
 
           <div class="form-outline mb-3">
             <input
               type="password"
               id="register-password"
+              name="password"
               class="form-control form-control-lg"
               placeholder="Enter password"
               required
               minlength="6"
+              maxlength="64"
             />
-            <label class="form-label" for="register-password">Password</label>
+
           </div>
 
           <div class="form-outline mb-3">
             <input
               type="password"
               id="register-password-repeat"
+              name="password_repeat"
               class="form-control form-control-lg"
               placeholder="Enter password again"
               required
               minlength="6"
+              maxlength="64"
             />
-            <label class="form-label" for="register-password-repeat">Repeat password</label>
+
           </div>
 
           <div class="form-outline mb-3">
             <input
               type="text"
               id="register-phone"
+              name="phone"
               class="form-control form-control-lg"
               placeholder="Enter phone number"
               required
+              minlength="6"
+              maxlength="30"
             />
-            <label class="form-label" for="register-phone">Phone number</label>
+
           </div>
 
           <div class="text-center text-lg-start mt-4 pt-2">
             <button
               id="register-btn"
-              type="button"
+              type="submit"
               class="btn btn-primary btn-lg"
-              style="padding-left: 2.5rem; padding-right: 2.5rem;"
-            >
+              style="padding-left: 2.5rem; padding-right: 2.5rem;">
               Register
             </button>
 
