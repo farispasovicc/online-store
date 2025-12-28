@@ -7,7 +7,7 @@ require __DIR__ . '/../../../vendor/autoload.php';
 if($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.0.1'){
     define('BASE_URL', 'http://localhost/xampp/FarisPasovic/onlineclothesclothes/backend');
 } else {
-    define('BASE_URL', 'https://your-production-url.com/backend/');
+    define('BASE_URL', 'https://stingray-app-hr7pv.ondigitalocean.app/backend/');
 }
 
 $openapi = \OpenApi\Generator::scan([
