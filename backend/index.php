@@ -1,5 +1,15 @@
 <?php
 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authentication");
+header("Access-Control-Max-Age: 86400");
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
+}
+
 require __DIR__ . '/vendor/autoload.php';
 
 require_once __DIR__ . '/config.php';
@@ -38,21 +48,14 @@ Flight::route('/*', function () {
         return TRUE;
     }
 
-
     try {
         $token = Flight::request()->getHeader("Authentication");
-
-
         Flight::auth_middleware()->verifyToken($token);
-
         return TRUE;
-
     } catch (Exception $e) {
         Flight::halt(401, $e->getMessage());
     }
 });
-
-
 
 require_once __DIR__ . '/routes/AuthRoutes.php';
 require_once __DIR__ . '/routes/UserRoutes.php';

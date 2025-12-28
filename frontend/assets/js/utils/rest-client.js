@@ -3,11 +3,12 @@ let RestClient = {
     $.ajax({
       url: Constants.PROJECT_BASE_URL + url,
       type: "GET",
+      crossDomain: true,
       beforeSend: function (xhr) {
-        xhr.setRequestHeader(
-          "Authentication",
-          localStorage.getItem(Constants.TOKEN_KEY)
-        );
+        const token = localStorage.getItem(Constants.TOKEN_KEY);
+        if (token && token !== "null" && token !== "undefined") {
+          xhr.setRequestHeader("Authentication", token);
+        }
       },
       success: function (response) {
         if (callback) callback(response);
@@ -22,13 +23,21 @@ let RestClient = {
     $.ajax({
       url: Constants.PROJECT_BASE_URL + url,
       type: method,
-      data: JSON.stringify(data),
+      data: data ? JSON.stringify(data) : null,
       contentType: "application/json",
+      crossDomain: true,
       beforeSend: function (xhr) {
-        xhr.setRequestHeader(
-          "Authentication",
-          localStorage.getItem(Constants.TOKEN_KEY)
-        );
+        const token = localStorage.getItem(Constants.TOKEN_KEY);
+
+        if (
+          token &&
+          token !== "null" &&
+          token !== "undefined" &&
+          url.indexOf("auth/login") === -1 &&
+          url.indexOf("auth/register") === -1
+        ) {
+          xhr.setRequestHeader("Authentication", token);
+        }
       }
     })
       .done(function (response) {
