@@ -32,12 +32,6 @@ Flight::group('/auth', function() {
      *                     type="string",
      *                     example="demo@gmail.com",
      *                     description="User email"
-     *                 ),
-     *                 @OA\Property(
-     *                     property="phone",
-     *                     type="string",
-     *                     example="+38761111222",
-     *                     description="User phone number"
      *                 )
      *             )
      *         )
@@ -63,16 +57,23 @@ Flight::group('/auth', function() {
     Flight::route("POST /register", function () {
         $data = Flight::request()->data->getData();
 
+        if (!is_array($data)) {
+            $raw = Flight::request()->getBody();
+            $decoded = json_decode($raw, true);
+            $data = is_array($decoded) ? $decoded : [];
+        }
+
         $response = Flight::auth_service()->register($data);
 
-        if ($response['success']) {
+        if (isset($response['success']) && $response['success']) {
             Flight::json([
                 'message' => 'User registered successfully',
                 'data' => $response['data']
             ]);
         } else {
-            $code = isset($response['code']) ? $response['code'] : 400;
-            Flight::halt($code, $response['error']);
+            $code = isset($response['code']) ? (int)$response['code'] : 400;
+            $error = isset($response['error']) ? $response['error'] : 'Registration failed';
+            Flight::halt($code, $error);
         }
     });
 
@@ -106,16 +107,23 @@ Flight::group('/auth', function() {
     Flight::route('POST /login', function() {
         $data = Flight::request()->data->getData();
 
+        if (!is_array($data)) {
+            $raw = Flight::request()->getBody();
+            $decoded = json_decode($raw, true);
+            $data = is_array($decoded) ? $decoded : [];
+        }
+
         $response = Flight::auth_service()->login($data);
 
-        if ($response['success']) {
+        if (isset($response['success']) && $response['success']) {
             Flight::json([
                 'message' => 'User logged in successfully',
                 'data' => $response['data']
             ]);
         } else {
-            $code = isset($response['code']) ? $response['code'] : 401;
-            Flight::halt($code, $response['error']);
+            $code = isset($response['code']) ? (int)$response['code'] : 401;
+            $error = isset($response['error']) ? $response['error'] : 'Login failed';
+            Flight::halt($code, $error);
         }
     });
 });
