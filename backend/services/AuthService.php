@@ -21,7 +21,6 @@ class AuthService extends BaseService {
    public function register($entity) {
        $email = isset($entity['email']) ? trim($entity['email']) : '';
        $password = isset($entity['password']) ? (string)$entity['password'] : '';
-       $phone = isset($entity['phone']) ? trim((string)$entity['phone']) : '';
 
        if ($email === '' || $password === '') {
            return ['success' => false, 'error' => 'Email and password are required.', 'code' => 400];
@@ -33,10 +32,6 @@ class AuthService extends BaseService {
 
        if (strlen($password) < 6 || strlen($password) > 64) {
            return ['success' => false, 'error' => 'Password must be between 6 and 64 characters.', 'code' => 400];
-       }
-
-       if ($phone !== '' && !preg_match('/^[0-9 +()\-\_]{6,30}$/', $phone)) {
-           return ['success' => false, 'error' => 'Invalid phone number.', 'code' => 400];
        }
 
        $email_exists = $this->auth_dao->get_user_by_email($email);

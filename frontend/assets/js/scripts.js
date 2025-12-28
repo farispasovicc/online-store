@@ -116,16 +116,11 @@ $(function () {
     }
 
     if ($("#register-form").length) {
-      $.validator.addMethod("phoneLoose", function (value) {
-        return /^[0-9 +()-]{6,30}$/.test(value || "");
-      }, "Please enter a valid phone number");
-
       $("#register-form").validate({
         rules: {
           email: { required: true, email: true },
           password: { required: true, minlength: 6, maxlength: 64 },
-          password_repeat: { required: true, equalTo: "#register-password" },
-          phone: { required: true, phoneLoose: true }
+          password_repeat: { required: true, equalTo: "#register-password" }
         },
         messages: {
           email: {
@@ -140,9 +135,6 @@ $(function () {
           password_repeat: {
             required: "Please repeat your password",
             equalTo: "Passwords do not match"
-          },
-          phone: {
-            required: "Please enter your phone number"
           }
         },
         submitHandler: function () {
@@ -150,8 +142,7 @@ $(function () {
 
           const payload = {
             email: $("#register-email").val(),
-            password: $("#register-password").val(),
-            phone: $("#register-phone").val()
+            password: $("#register-password").val()
           };
 
           AuthService.register(
