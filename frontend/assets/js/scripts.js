@@ -91,7 +91,9 @@ $(function () {
             maxlength: "Password cannot be longer than 64 characters"
           }
         },
-        submitHandler: function () {
+        submitHandler: function (form, event) {
+          if (event) event.preventDefault();
+
           $.blockUI({ message: "<h3>Please wait, processing your request...</h3>" });
 
           const email = $("#login-email").val();
@@ -137,7 +139,9 @@ $(function () {
             equalTo: "Passwords do not match"
           }
         },
-        submitHandler: function () {
+        submitHandler: function (form, event) {
+          if (event) event.preventDefault();
+
           $.blockUI({ message: "<h3>Please wait, processing your request...</h3>" });
 
           const payload = {
@@ -163,6 +167,24 @@ $(function () {
     }
   }
 
+  function initValidationWhenReady(retries) {
+    if (retries === undefined) retries = 20;
+
+    const loginReady = $("#login-form").length && !$("#login-form").data("validator");
+    const registerReady = $("#register-form").length && !$("#register-form").data("validator");
+
+    if (loginReady || registerReady) {
+      initValidation();
+      return;
+    }
+
+    if (retries > 0) {
+      setTimeout(function () {
+        initValidationWhenReady(retries - 1);
+      }, 100);
+    }
+  }
+
   function handleRoute() {
     const hash = location.hash || "#home";
     const protectedRoutes = ["#products", "#cart", "#admin-panel"];
@@ -182,7 +204,7 @@ $(function () {
     setActive();
     updateNavbar();
 
-    initValidation();
+    initValidationWhenReady();
   }
 
   handleRoute();
@@ -215,10 +237,5 @@ $(function () {
         alert((xhr && xhr.responseText) ? xhr.responseText : "Delete failed.");
       }
     );
-  });
-
-  $(document).on("submit", "#login-form, #register-form", function (e) {
-    e.preventDefault();
-    return false;
   });
 });
