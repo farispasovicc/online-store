@@ -1,37 +1,50 @@
 <?php
 
-
-// Set the reporting
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL ^ (E_NOTICE | E_DEPRECATED));
-
 
 class Config
 {
    public static function DB_NAME()
    {
-       return 'onlinestore'; 
+       return Config::get_env('DB_NAME', 'onlinestore');
    }
+
    public static function DB_PORT()
    {
-       return  3306;
+       return Config::get_env('DB_PORT', 3306);
    }
+
    public static function DB_USER()
    {
-       return 'root';
+       return Config::get_env('DB_USER', 'root');
    }
+
    public static function DB_PASSWORD()
    {
-       return '';
+       return Config::get_env('DB_PASSWORD', '');
    }
+
    public static function DB_HOST()
    {
-       return '127.0.0.1';
+       return Config::get_env('DB_HOST', '127.0.0.1');
    }
 
-
-   public static function JWT_SECRET() {
-       return '627e0ad9a18a0d996dd1be1a145fefe3';
+   public static function JWT_SECRET()
+   {
+       return Config::get_env('JWT_SECRET', '627e0ad9a18a0d996dd1be1a145fefe3');
    }
+
+  public static function get_env($name, $default)
+{
+    $val = getenv($name);
+    if ($val !== false && trim($val) !== '') {
+        return $val;
+    }
+    if (isset($_ENV[$name]) && trim($_ENV[$name]) !== '') {
+        return $_ENV[$name];
+    }
+    return $default;
+}
 }

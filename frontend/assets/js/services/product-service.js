@@ -1,40 +1,21 @@
 var ProductService = {
-  loadProducts: function () {
-    RestClient.get("products", function (data) {
-
-      let html = "";
-
-      data.forEach(p => {
-        html += `
-          <tr>
-            <td>${p.id}</td>
-            <td>${p.name}</td>
-            <td>${p.brand}</td>
-            <td>${p.price}</td>
-            <td class="admin-actions">
-              <button class="btn btn-danger btn-sm"
-                onclick="ProductService.deleteProduct(${p.id})">
-                Delete
-              </button>
-            </td>
-          </tr>
-        `;
-      });
-
-      $("#products-body").html(html);
-
-      if (!Utils.isAdmin()) {
-        $(".admin-actions").hide();
-      }
-
-    }, function () {
-      window.location.hash = "#login";
-    });
+  getAll: function (callback, error_callback) {
+    RestClient.get("products", callback, error_callback);
   },
 
-  deleteProduct: function (id) {
-    RestClient.delete("products/" + id, function () {
-      ProductService.loadProducts();
-    });
+  getById: function (id, callback, error_callback) {
+    RestClient.get("products/" + id, callback, error_callback);
+  },
+
+  create: function (product, callback, error_callback) {
+    RestClient.post("products", product, callback, error_callback);
+  },
+
+  update: function (id, product, callback, error_callback) {
+    RestClient.put("products/" + id, product, callback, error_callback);
+  },
+
+  delete: function (id, callback, error_callback) {
+    RestClient.delete("products/" + id, null, callback, error_callback);
   }
 };

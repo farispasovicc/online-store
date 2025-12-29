@@ -2,64 +2,60 @@
   <div class="container-fluid h-custom">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-md-9 col-lg-6 col-xl-5">
-        <img src="assets/imgs/login.png"
-          class="img-fluid" alt="Sample image">
+        <img src="assets/imgs/login.png" class="img-fluid" alt="Sample image" />
       </div>
-      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-        <form onsubmit="return false;">
 
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <form id="register-form" novalidate>
           <div class="divider d-flex align-items-center my-4">
             <p class="text-center fw-bold mx-3 mb-0">REGISTER</p>
           </div>
-
 
           <div class="form-outline mb-4">
             <input
               type="email"
               id="register-email"
+              name="email"
               class="form-control form-control-lg"
               placeholder="Enter a valid email address"
+              required
             />
-            <label class="form-label">Email address</label>
-          </div>
 
+          </div>
 
           <div class="form-outline mb-3">
             <input
               type="password"
               id="register-password"
+              name="password"
               class="form-control form-control-lg"
               placeholder="Enter password"
+              required
+              minlength="6"
+              maxlength="64"
             />
-            <label class="form-label">Password</label>
-          </div>
 
+          </div>
 
           <div class="form-outline mb-3">
             <input
               type="password"
               id="register-password-repeat"
+              name="password_repeat"
               class="form-control form-control-lg"
               placeholder="Enter password again"
+              required
+              minlength="6"
+              maxlength="64"
             />
-            <label class="form-label">Repeat password</label>
+
           </div>
 
-
-          <div class="form-outline mb-3">
-            <input
-              type="text"
-              id="register-phone"
-              class="form-control form-control-lg"
-              placeholder="Enter phone number"
-            />
-            <label class="form-label">Phone number</label>
-          </div>
 
           <div class="text-center text-lg-start mt-4 pt-2">
             <button
               id="register-btn"
-              type="button"
+              type="submit"
               class="btn btn-primary btn-lg"
               style="padding-left: 2.5rem; padding-right: 2.5rem;">
               Register
@@ -67,45 +63,11 @@
 
             <p class="small fw-bold mt-2 pt-1 mb-0">
               Already have an account?
-              <a href="login.html" class="link-danger">Login</a>
+              <a href="#login" class="link-danger">Login</a>
             </p>
           </div>
-
         </form>
       </div>
     </div>
   </div>
 </section>
-
-
-<script src="assets/js/jquery.min.js"></script>
-
-<script src="assets/js/utils/constants.js"></script>
-<script src="assets/js/utils/rest-client.js"></script>
-<script src="assets/js/utils/utils.js"></script>
-<script src="assets/js/services/auth-service.js"></script>
-
-<script>
-
-  if (Utils.isLoggedIn()) {
-    window.location.href = "../index.html";
-  }
-
-  $("#register-btn").on("click", function () {
-    const email = $("#register-email").val();
-    const password = $("#register-password").val();
-    const repeat = $("#register-password-repeat").val();
-
-    if (!email || !password || !repeat) {
-      alert("All fields are required");
-      return;
-    }
-
-    if (password !== repeat) {
-      alert("Passwords do not match");
-      return;
-    }
-
-    AuthService.register(email, password);
-  });
-</script>
