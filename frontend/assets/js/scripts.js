@@ -74,7 +74,7 @@ $(function () {
   }
 
   function initValidation() {
-    if ($("#login-form").length) {
+    if ($("#login-form").length && !$("#login-form").data("validator")) {
       $("#login-form").validate({
         rules: {
           email: { required: true, email: true },
@@ -115,7 +115,7 @@ $(function () {
       });
     }
 
-    if ($("#register-form").length) {
+    if ($("#register-form").length && !$("#register-form").data("validator")) {
       $("#register-form").validate({
         rules: {
           email: { required: true, email: true },
@@ -182,7 +182,7 @@ $(function () {
     setActive();
     updateNavbar();
 
-    setTimeout(initValidation, 50);
+    initValidation();
   }
 
   handleRoute();
@@ -215,5 +215,10 @@ $(function () {
         alert((xhr && xhr.responseText) ? xhr.responseText : "Delete failed.");
       }
     );
+  });
+
+  $(document).on("submit", "#login-form, #register-form", function (e) {
+    e.preventDefault();
+    return false;
   });
 });
